@@ -2,11 +2,11 @@
 
     <template>
       <div class="chart__container">
-        <!-- modals -->
+      <!-- modals -->
         <div :style="`top: ${positionTop - 40}px; left: ${positionLeft + 5}px; display: ${displayInfoModal ? 'block' : 'none'}`" class="chart__container__viewInfoModal">
           <ViewChartsValueModal :enter-value-to-view="valueToView"/>
         </div>
-        <!--  -->
+      <!--  -->
         <v-stage :config="konvaInitObject.configKonva">
           <v-layer>
             <v-line :config="konvaInitObject.axisYline"></v-line>
@@ -22,7 +22,9 @@
               @mouseover="setChartInfo(rectangle.rectConfig.inputValue)"
               @mousemove="viewChartInfo($event.evt)"
               @mouseleave="hideChartInfo"
-              ></v-rect>
+              >
+              </v-rect>
+              <v-text :config="rectangle.nameConfig" :key="rectangle.id" ref="rectanglesName"></v-text>
             </template>
           </v-layer>
         </v-stage> 
@@ -44,7 +46,7 @@ export default {
   data() {
     return {
       konvaInitObject: {},
-      valueToView: 12345,
+      valueToView: null,
       displayInfoModal: false,
       positionTop: null,
       positionLeft: null, 
@@ -52,6 +54,7 @@ export default {
   },
   mounted() {
     this.konvaInitObject = { ...initRectangleChart(this.chartData) };
+    this.setRectangleNames();
   },
   methods: {
     viewChartInfo(e) {
@@ -65,6 +68,12 @@ export default {
     hideChartInfo() {
       this.displayInfoModal = false;
     },
+    setRectangleNames() {
+      // this.konvaInitObject.rectangles.forEach((rectangle, index) => { 
+      // console.log(rectangle.nameConfig)
+      // this.$refs.rectanglesName[index].offsetX = 10;
+    // });
+    }
   },
 };
 </script>

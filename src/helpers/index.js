@@ -105,7 +105,13 @@ export const initRectangleChart = (chartData) => {
         inputValue: data.value,
         fill: dynamicColors(),
         stroke: 'black',
-        strokeWidth: 2
+        strokeWidth: 2,
+      },
+      nameConfig: {
+        x: indentForDividingLine + rectangleOptimalWidth*index,
+        y: actualChartHeight - indentForDividingLine * 2,
+        text: data.valueName,
+        fontSize: graduateFontSize,
       }
     })
     const timerToPaint = setInterval(
