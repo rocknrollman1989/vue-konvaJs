@@ -1,28 +1,33 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <section class="vh-100">
+    <component :is="typeOfComponent"/>
+  </section>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import StartBildScheduleButton from '@/components/buttons/StartBildScheduleButton.vue';
+import CreateScheduleModal from '@/components/modals/CreateScheduleModal.vue';
+import SchedulesContainer from '@/components/schedules/SchedulesContainer.vue';
+import { rectanglesDataObject } from '@/helpers';
+
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data() {
+    return {
+     createScheduleProcess: false,
+    };
+  },
+  computed: {
+    typeOfComponent() {
+      if (rectanglesDataObject.chartsDataArray.length) return SchedulesContainer;
+      if (this.createScheduleProcess) return CreateScheduleModal;
+      return StartBildScheduleButton;
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
