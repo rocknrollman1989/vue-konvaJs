@@ -4,7 +4,7 @@
       <label>Enter amount of rectangles:</label>
     </b-col>
     <b-col>
-      <b-form-input type="number" @input="$emit('input', $event)"
+      <b-form-input type="number" @input="$emit('input', Number($event))"
       :value="amountOfRectangles"
       >
       </b-form-input>

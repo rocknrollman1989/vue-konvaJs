@@ -4,17 +4,17 @@
     >
       <template slot="modal-header">
         <div class="w-100" >
-          <h5 class="text-center">Add schedule info</h5>
+          <h5 class="text-center">Add chart info</h5>
         </div>
       </template>
 
       <template slot="default">
-        <AmountOfScheduleForm v-if="slotsParams.isAmountOfRectangles"  v-on:input="getInputValue" :amount-of-rectangles="amountOfRectangles"/>
-        <CreateScheduleDataForm v-if="slotsParams.isInterestedParams" :amount-of-rectangles="amountOfRectangles" ref="scheduleDataForm"/>
+        <AmountOfChartForm v-if="slotsParams.isAmountOfRectangles"  v-on:input="getInputValue" :amount-of-rectangles="amountOfRectangles"/>
+        <CreateChartDataForm v-if="slotsParams.isInterestedParams" :amount-of-rectangles="amountOfRectangles" ref="chartDataForm"/>
       </template>
 
       <template slot="modal-footer">
-        <b-button variant="success" @click="saveScheduleInfo">Ok</b-button>
+        <b-button variant="success" @click="saveChartInfo">Ok</b-button>
         <b-button variant="danger" @click="returnToMainPage">Cancel</b-button>
       </template>
     </b-modal>
@@ -22,14 +22,14 @@
 </template>
 
 <script>
-import AmountOfScheduleForm from '@/components/forms/AmountOfScheduleForm.vue';
-import CreateScheduleDataForm from '@/components/forms/CreateScheduleDataForm.vue'
+import AmountOfChartForm from '@/components/forms/AmountOfChartForm.vue';
+import CreateChartDataForm from '@/components/forms/CreateChartDataForm.vue'
 import { rectanglesDataObject } from '@/helpers';
   
   export default {
     components: {
-      AmountOfScheduleForm,
-      CreateScheduleDataForm,
+      AmountOfChartForm,
+      CreateChartDataForm,
     },
     data() {
       return {
@@ -48,18 +48,19 @@ import { rectanglesDataObject } from '@/helpers';
         this.amountOfRectangles = 4;
         slotsParams.isAmountOfRectangles = true;
         slotsParams.isInterestedParams = false;
-        setTimeout(() => this.$parent.createScheduleProcess = false, 500);
+        setTimeout(() => this.$parent.createChartProcess = false, 500);
       },
       getInputValue(value) {
-        if (this.isAmountOfRectangles) return this.amountOfRectangles = value;
+        const { isAmountOfRectangles } = this.slotsParams;
+        if (isAmountOfRectangles) return this.amountOfRectangles = value;
       },
-      saveScheduleInfo() {
+      saveChartInfo() {
         const { slotsParams } = this;
         if (slotsParams.isInterestedParams) { 
           rectanglesDataObject.amountOfRectangles = this.amountOfRectangles;
-          rectanglesDataObject.chartsDataArray = [...this.$refs.scheduleDataForm.chartsDataArray];
+          rectanglesDataObject.chartsDataArray = [...this.$refs.chartDataForm.chartsDataArray];
           this.modalShow = false;
-          setTimeout(() => this.$parent.createScheduleProcess = false, 500);
+          setTimeout(() => this.$parent.createChartProcess = false, 500);
           return;
         }
         slotsParams.isAmountOfRectangles = false;

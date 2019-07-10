@@ -1,7 +1,7 @@
 
 
     <template>
-      <div class="schedule__container">
+      <div class="chart__container">
         <v-stage :config="konvaInitObject.configKonva">
           <v-layer>
             <v-line :config="konvaInitObject.axisYline"></v-line>
@@ -34,7 +34,6 @@ export default {
   },
   mounted() {
     this.konvaInitObject = { ...initRectangleChart(this.chartData) };
-    console.log(this.konvaInitObject)
   }
 }
 </script>

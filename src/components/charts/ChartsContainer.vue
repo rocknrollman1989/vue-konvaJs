@@ -2,7 +2,7 @@
   <b-container fluid>
     <b-col>
       <h1>Charts</h1>
-      <RectangleSchedule :chart-data="chartData"/>
+      <RectangleChart :chart-data="chartData"/>
     
     </b-col>
   </b-container>
@@ -10,11 +10,11 @@
 
 <script>
 import { rectanglesDataObject } from '@/helpers';
-import RectangleSchedule from './RectangleSchedule.vue';
+import RectangleChart from './RectangleChart.vue';
 
 export default {
   components: {
-    RectangleSchedule,
+    RectangleChart,
   },
   data() {
     return {

@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import StartBildScheduleButton from '@/components/buttons/StartBildScheduleButton.vue';
-import CreateScheduleModal from '@/components/modals/CreateScheduleModal.vue';
-import SchedulesContainer from '@/components/schedules/SchedulesContainer.vue';
+import StartBildChartButton from '@/components/buttons/StartBildChartButton.vue';
+import CreateChartModal from '@/components/modals/CreateChartModal.vue';
+import ChartsContainer from '@/components/charts/ChartsContainer.vue';
 import { rectanglesDataObject } from '@/helpers';
 
 
@@ -15,14 +15,14 @@ export default {
   name: 'app',
   data() {
     return {
-     createScheduleProcess: false,
+     createChartProcess: false,
     };
   },
   computed: {
     typeOfComponent() {
-      if (rectanglesDataObject.chartsDataArray.length) return SchedulesContainer;
-      if (this.createScheduleProcess) return CreateScheduleModal;
-      return StartBildScheduleButton;
+      if (rectanglesDataObject.chartsDataArray.length) return ChartsContainer;
+      if (this.createChartProcess) return CreateChartModal;
+      return StartBildChartButton;
     }
   }
 }
