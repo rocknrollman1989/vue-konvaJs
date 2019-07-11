@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { dynamicColors } from '@/helpers';
+
 export default {
   props: {
     amountOfRectangles: Number,
@@ -46,12 +48,13 @@ export default {
             value: Math.floor(Math.random()*100),
             labelForName: `Enter rectangle name`,
             valueName: `Rectangle №${i+1}`,
+            chartElementColor: dynamicColors(),
           })
     }
   },
   methods: {
     setData(value, rectangle) {
-      rectangle.value = value;
+      rectangle.value = Number(value);
     },
     setName(value, rectangle) {
       rectangle.valueName = value;

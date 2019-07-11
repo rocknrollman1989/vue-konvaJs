@@ -7,17 +7,17 @@
           <ViewChartsValueModal :enter-value-to-view="valueToView"/>
         </div>
       <!--  -->
-        <v-stage :config="konvaInitObject.configKonva">
+        <v-stage :config="konvaInitRectObject.configKonva">
           <v-layer>
-            <v-line :config="konvaInitObject.axisYline"></v-line>
-            <v-line :config="konvaInitObject.axisXline"></v-line>
-            <template v-for="(graduate) in konvaInitObject.graduateYlines">
+            <v-line :config="konvaInitRectObject.axisYline"></v-line>
+            <v-line :config="konvaInitRectObject.axisXline"></v-line>
+            <template v-for="(graduate) in konvaInitRectObject.graduateYlines">
               <v-line :config="graduate.graduateConfig" :key="graduate.id"></v-line>
             </template>
-            <template v-for="(graduate) in konvaInitObject.textToGraduateYlines">
+            <template v-for="(graduate) in konvaInitRectObject.textToGraduateYlines">
               <v-text :config="graduate.textConfig" :key="graduate.id"></v-text>
             </template>
-            <template v-for="(rectangle) in konvaInitObject.rectangles">
+            <template v-for="(rectangle) in konvaInitRectObject.rectangles">
               <v-rect :config="rectangle.rectConfig" :key="rectangle.id"
               @mouseover="setChartInfo(rectangle.rectConfig.inputValue)"
               @mousemove="viewChartInfo($event.evt)"
@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      konvaInitObject: {},
+      konvaInitRectObject: {},
       valueToView: null,
       displayInfoModal: false,
       positionTop: null,
@@ -53,8 +53,7 @@ export default {
     };
   },
   mounted() {
-    this.konvaInitObject = { ...initRectangleChart(this.chartData) };
-    this.setRectangleNames();
+    this.konvaInitRectObject = initRectangleChart(this.chartData);
   },
   methods: {
     viewChartInfo(e) {
@@ -68,26 +67,17 @@ export default {
     hideChartInfo() {
       this.displayInfoModal = false;
     },
-    setRectangleNames() {
-      // this.konvaInitObject.rectangles.forEach((rectangle, index) => { 
-      // console.log(rectangle.nameConfig)
-      // this.$refs.rectanglesName[index].offsetX = 10;
-    // });
+  },
+  watch: {
+    chartData: {
+      handler(val){
+        this.konvaInitRectObject = initRectangleChart(val);
+      },
+      deep: true
     }
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.chart__container {
-  position: relative;
-
-  &__viewInfoModal {
-    position: absolute;
-    z-index: 100;
-  }
-}
-</style>
 
     
   
