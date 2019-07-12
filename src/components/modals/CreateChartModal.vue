@@ -24,7 +24,7 @@
 <script>
 import AmountOfChartForm from '@/components/forms/AmountOfChartForm.vue';
 import CreateChartDataForm from '@/components/forms/CreateChartDataForm.vue'
-import { rectanglesDataObject } from '@/helpers';
+import { rectanglesDataObject, eventBus } from '@/helpers';
   
   export default {
     components: {
@@ -48,7 +48,7 @@ import { rectanglesDataObject } from '@/helpers';
         this.amountOfRectangles = 4;
         slotsParams.isAmountOfRectangles = true;
         slotsParams.isInterestedParams = false;
-        setTimeout(() => this.$parent.createChartProcess = false, 500);
+        setTimeout(() => eventBus.$emit('chartProcess', false), 500);
       },
       getInputValue(value) {
         const { isAmountOfRectangles } = this.slotsParams;
@@ -60,7 +60,7 @@ import { rectanglesDataObject } from '@/helpers';
           rectanglesDataObject.amountOfRectangles = this.amountOfRectangles;
           rectanglesDataObject.chartsDataArray = [...this.$refs.chartDataForm.chartsDataArray];
           this.modalShow = false;
-          setTimeout(() => this.$parent.createChartProcess = false, 500);
+          setTimeout(() => eventBus.$emit('chartProcess', false), 500);
           return;
         }
         slotsParams.isAmountOfRectangles = false;

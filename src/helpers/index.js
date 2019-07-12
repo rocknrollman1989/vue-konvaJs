@@ -1,8 +1,12 @@
+import Vue from 'vue';
+
 
 export const rectanglesDataObject = {
   amountOfRectangles: null,
   chartsDataArray: [],
 }
+
+export const eventBus = new Vue();
 
 
 const indentForDividingLine = 25;

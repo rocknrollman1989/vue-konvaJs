@@ -7,11 +7,14 @@
 </template>
 
 <script>
+import { eventBus } from '@/helpers';
+
   export default {
     methods: {
       createNewChart() {
-        this.$parent.createChartProcess = true;
+        eventBus.$emit('chartProcess', true)
       },
     },
   };
 </script>
+

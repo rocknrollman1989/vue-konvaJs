@@ -1,6 +1,6 @@
 <template>
   <b-container fluid>
-    <b-col>
+    <b-col class="d-flex flex-column align-items-center">
       <h1>Charts</h1>
       <RectangleChart :chart-data="chartData"/>
       <RingChart :chart-data="chartData"/>
