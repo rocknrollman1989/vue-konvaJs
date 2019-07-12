@@ -4,7 +4,7 @@
       <b-button variant="success" @click="createNewChart" class="mb-5">Create new Chart</b-button>
       <b-button variant="danger" @click="deleteAllCharts">Delete all charts</b-button>
     </div>
-    <diV>
+    <diV v-if="Object.keys(chartsStore).length">
       <h3>Your charts:</h3>
       <b-list-group>
         <b-list-group-item 
@@ -22,18 +22,18 @@
 </template>
 
 <script>
-import { eventBus, rectanglesDataObject } from '@/helpers';
+import { eventBus } from '@/helpers';
 import { chartsStore } from '@/helpers/storageControlFunc';
 
 
   export default {
     data() {
       return {
-        chartsStore: null,
+        chartsStore: {},
       };
     },
     mounted() {
-      this.chartsStore = chartsStore;
+      if (Object.keys(chartsStore).length) this.chartsStore = chartsStore;
     },
     methods: {
       createNewChart() {

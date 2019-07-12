@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 
-export let rectanglesDataObject = {
+export const rectanglesDataObject = {
   amountOfRectangles: null,
   chartsDataArray: [],
 }
@@ -32,7 +32,7 @@ const axisYGraduateLinesPosition = (i) => {
 const getDataLongForBuildAngle = (dataArray) => {
   let circleLong = 0;
   dataArray.forEach((data) => {
-    circleLong += data.value;
+    circleLong += Number(data.value);
   })
   return circleLong;
 }
@@ -80,9 +80,14 @@ const getMaxDataValue = (array) => {
   return maxValue;
 }
 
-const getAnimatedChartHeigh = (rect, neededRectHeight, timerToPaint) => {
-  if(rect.height == neededRectHeight) clearInterval(timerToPaint);
-  rect.height -= 1
+const getAnimatedChartHeigh = (figure, neededHeight, timerToPaint) => {
+  if (figure.height == neededHeight) clearInterval(timerToPaint);
+  figure.height -= 1;
+}
+
+const getAnimatedChartAngle = (figure, heededAngle, timerToPaint) => {
+  if (figure.angle == heededAngle) clearInterval(timerToPaint);
+  figure.angle += 1;
 }
 
 const getAngle = (value, allDataLongForBuildAngle) => {
@@ -184,7 +189,7 @@ export const initRingChart = (chartData) => {
         y: actualChartHeight / 2,
         innerRadius: innerRadiusForRingChart,
         outerRadius: getProportionToScaleRingChart(data.value, maxDataValue),
-        angle: dataAngle,
+        angle: 0,
         fill: data.chartElementColor,
         stroke: 'black',
         inputValue: data.value,
@@ -193,6 +198,9 @@ export const initRingChart = (chartData) => {
       }
     })
     angleCounter += dataAngle;
+    const timerToPaint = setInterval(
+      () => getAnimatedChartAngle(konvaInitRingObject.rings[index].ringConfig, getAngle(data.value, allDataLongForBuildAngle), timerToPaint)
+      , 1);
   });
   return konvaInitRingObject;
 }
