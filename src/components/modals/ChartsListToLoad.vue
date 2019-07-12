@@ -10,7 +10,15 @@
 
       <template slot="default">
         <b-list-group>
-          <b-list-group-item v-for="chart in chartsStore" :key="chart.id">{{chartsStore}}</b-list-group-item>
+          <b-list-group-item 
+          v-for="(chart, key, index) in chartsStore" 
+          :key="key"
+          class="chart__list"
+          @click="loadChart(chart)"
+          >
+            <span>{{index + 1}}.</span>
+            {{key}}
+          </b-list-group-item>
         </b-list-group>
       </template>
 
@@ -39,7 +47,6 @@ import { chartsStore } from '@/helpers/storageControlFunc';
     },
     mounted() {
       this.$root.$on('bv::modal::show', () => {
-        console.log("!!!", chartsStore)
         this.chartsStore = chartsStore;
       })
     },
@@ -50,6 +57,19 @@ import { chartsStore } from '@/helpers/storageControlFunc';
       returnToMainPage() {
         this.modalShow = false;
       },
+      loadChart(chart) {
+        rectanglesDataObject.id = chart.id;
+        rectanglesDataObject.chartsDataArray = chart.chartsDataArray;
+        rectanglesDataObject.amountOfRectangles = chart.amountOfRectangles;
+        this.modalShow = false;
+      }
     },
   }
 </script>
+
+<style>
+ .chart__list:hover {
+   background: #c9c4c633;
+   cursor: pointer;
+ }
+</style>

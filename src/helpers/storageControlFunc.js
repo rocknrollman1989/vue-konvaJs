@@ -15,6 +15,11 @@ export const saveChart = () => {
   localStorage.setItem('charts', JSON.stringify(chartsStore));
 };
 
+export const deleteAllCharts = () => {
+  localStorage.removeItem('charts');
+  chartsStore = {};
+};
+
 const generateIdForObject = () => {
   if (!chartsStore || !Object.keys(chartsStore).length) return getRandomNumber();
   let idToReturn = null;
@@ -23,5 +28,6 @@ const generateIdForObject = () => {
   })
   return idToReturn ||  getRandomNumber();
 };
+
 
 initChartsStore();

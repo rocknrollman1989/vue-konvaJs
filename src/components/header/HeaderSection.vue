@@ -3,6 +3,7 @@
     <b-button variant="primary" @click="saveChartToStorage">Save my chart</b-button>
     <b-button variant="primary" @click="openModalToLoad">Load another chart</b-button>
     <b-button variant="primary" @click="createNewChart">Create a new chart</b-button>
+    <b-button variant="danger" @click="deleteAllCharts">Delete all charts</b-button>
   </header>
 </template>
 
@@ -25,6 +26,9 @@ export default {
     openModalToLoad() {
       eventBus.$emit('openLoadModal', true);
     },
+    deleteAllCharts() {
+      eventBus.$emit('deleteAllCharts');
+    }
   },
 };
 </script>
