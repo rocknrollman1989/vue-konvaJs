@@ -1,6 +1,7 @@
 <template>
   <b-container fluid class="h-50">
     <div class="d-flex flex-column justify-content-center align-items-center h-100" >
+      <b-button variant="primary" @click="openPedigreeTree" class="mb-5">Open pedigree tree</b-button>
       <b-button variant="success" @click="createNewChart" class="mb-5">Create new Chart</b-button>
       <b-button variant="danger" @click="deleteAllCharts">Delete all charts</b-button>
     </div>
@@ -44,6 +45,9 @@ import { chartsStore } from '@/helpers/storageControlFunc';
       },
       loadChart(chart) {
         eventBus.$emit('loadChart', chart);
+      },
+      openPedigreeTree() {
+        eventBus.$emit('openPedigreeTree');
       }
     },
   };

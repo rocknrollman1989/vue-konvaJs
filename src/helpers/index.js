@@ -86,7 +86,7 @@ const getAnimatedChartHeigh = (figure, neededHeight, timerToPaint) => {
 }
 
 const getAnimatedChartAngle = (figure, heededAngle, timerToPaint) => {
-  if (figure.angle == heededAngle) clearInterval(timerToPaint);
+  if (figure.angle == heededAngle) return clearInterval(timerToPaint);
   figure.angle += 1;
 }
 
